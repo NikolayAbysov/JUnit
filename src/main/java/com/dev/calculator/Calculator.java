@@ -12,6 +12,7 @@ public class Calculator {
         this.operations.put('-', (a, b) -> (a - b));
         this.operations.put('*', (a, b) -> (a * b));
         this.operations.put('/', (a, b) -> (a / b));
+        this.operations.put('^', (a, b) -> (Math.pow(a, b)));
     }
 
     public double calculate(double a, double b, Character c) {

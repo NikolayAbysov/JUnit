@@ -33,17 +33,45 @@ class CalculatorTest {
     }
 
     @Test
+    void powOperationOk() {
+        Assertions.assertEquals(25, calculator.calculate(5, 2, '^'));
+    }
+
+    @Test()
     void wrongOperator() {
-        try {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             calculator.calculate(1, 1, 'a');
-        } catch (IllegalArgumentException e) {
-            return;
-        }
-        Assertions.fail("Runtime exception expected");
+        });
     }
 
     @Test
     void divideByZero() {
         Assertions.assertEquals(Double.POSITIVE_INFINITY, calculator.calculate(1, 0, '/'));
     }
+
+    @Test
+    void sumInfinity() {
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY, calculator.calculate(1, Double.NEGATIVE_INFINITY, '+'));
+    }
+
+    @Test
+    void subtractInfinity() {
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, calculator.calculate(1, Double.NEGATIVE_INFINITY, '-'));
+    }
+
+    @Test
+    void multiplyInfinity() {
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY, calculator.calculate(1, Double.NEGATIVE_INFINITY, '*'));
+    }
+
+    @Test
+    void divideInfinity() {
+        Assertions.assertEquals(-0.0, calculator.calculate(1, Double.NEGATIVE_INFINITY, '/'));
+    }
+
+    @Test
+    void powInfinity() {
+        Assertions.assertEquals(Double.NaN, calculator.calculate(1, Double.NEGATIVE_INFINITY, '^'));
+    }
+
 }
