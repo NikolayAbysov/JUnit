@@ -1,14 +1,14 @@
 package com.dev.calculator;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CalculatorTest {
-    private Calculator calculator;
+    private static Calculator calculator;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         calculator = new Calculator();
     }
 
@@ -37,7 +37,7 @@ class CalculatorTest {
         Assertions.assertEquals(25, calculator.calculate(5, 2, '^'));
     }
 
-    @Test()
+    @Test
     void wrongOperator() {
         Assertions.assertThrows(RuntimeException.class, () -> {
             calculator.calculate(1, 1, 'a');
@@ -46,32 +46,38 @@ class CalculatorTest {
 
     @Test
     void divideByZero() {
-        Assertions.assertEquals(Double.POSITIVE_INFINITY, calculator.calculate(1, 0, '/'));
+        Assertions.assertEquals(Double.POSITIVE_INFINITY,
+                calculator.calculate(1, 0, '/'));
     }
 
     @Test
     void sumInfinity() {
-        Assertions.assertEquals(Double.NEGATIVE_INFINITY, calculator.calculate(1, Double.NEGATIVE_INFINITY, '+'));
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY,
+                calculator.calculate(1, Double.NEGATIVE_INFINITY, '+'));
     }
 
     @Test
     void subtractInfinity() {
-        Assertions.assertEquals(Double.POSITIVE_INFINITY, calculator.calculate(1, Double.NEGATIVE_INFINITY, '-'));
+        Assertions.assertEquals(Double.POSITIVE_INFINITY,
+                calculator.calculate(1, Double.NEGATIVE_INFINITY, '-'));
     }
 
     @Test
     void multiplyInfinity() {
-        Assertions.assertEquals(Double.NEGATIVE_INFINITY, calculator.calculate(1, Double.NEGATIVE_INFINITY, '*'));
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY,
+                calculator.calculate(1, Double.NEGATIVE_INFINITY, '*'));
     }
 
     @Test
     void divideInfinity() {
-        Assertions.assertEquals(-0.0, calculator.calculate(1, Double.NEGATIVE_INFINITY, '/'));
+        Assertions.assertEquals(-0.0,
+                calculator.calculate(1, Double.NEGATIVE_INFINITY, '/'));
     }
 
     @Test
     void powInfinity() {
-        Assertions.assertEquals(Double.NaN, calculator.calculate(1, Double.NEGATIVE_INFINITY, '^'));
+        Assertions.assertEquals(Double.NaN,
+                calculator.calculate(1, Double.NEGATIVE_INFINITY, '^'));
     }
 
 }
